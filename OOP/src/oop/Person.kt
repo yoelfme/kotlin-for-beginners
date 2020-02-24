@@ -1,13 +1,11 @@
 package oop
 
-open class Person(open val name: String, open var age: Int) {
+abstract class Person(open val name: String, open var age: Int) {
     init {
         println("Object was created")
     }
 
-    fun speak() {
-        println("Hello!")
-    }
+    abstract fun speak()
 
     fun greet(name: String) {
         println("Hello $name")
@@ -21,6 +19,10 @@ open class Person(open val name: String, open var age: Int) {
 class Student(override val name: String, override var age: Int, val studentID: Long): Person(name, age) {
 
     fun isIntelligent() = true
+
+    override fun speak() {
+        println("Hi there, I'm a student")
+    }
 }
 
 class Employee(override val name: String, override var age: Int): Person(name, age) {
@@ -28,20 +30,14 @@ class Employee(override val name: String, override var age: Int): Person(name, a
     fun receivePayment() {
         println("Received payment")
     }
+
+    override fun speak() {
+        println("Hi, I'm employee")
+    }
 }
 
 
 fun main(args: Array<String>) {
-    val person = Person("Jack", 27)
- 
-    person.speak()
-    person.greet("world")
-
-    println(person.name)
-    println(person.age)
-
-    println(person.name)
-
     val student = Student("Yoel", 24, 1234)
 
     student.speak()
