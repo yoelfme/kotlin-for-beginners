@@ -1,8 +1,9 @@
 package oop
 
-class Person {
-    var name: String = "Sara"
-    var age: Int = 42
+open class Person(open val name: String, open var age: Int) {
+    init {
+        println("Object was created")
+    }
 
     fun speak() {
         println("Hello!")
@@ -17,16 +18,36 @@ class Person {
     }
 }
 
-fun main(args: Array<String>) {
-    val person = Person()
+class Student(override val name: String, override var age: Int, val studentID: Long): Person(name, age) {
 
+    fun isIntelligent() = true
+}
+
+class Employee(override val name: String, override var age: Int): Person(name, age) {
+
+    fun receivePayment() {
+        println("Received payment")
+    }
+}
+
+
+fun main(args: Array<String>) {
+    val person = Person("Jack", 27)
+ 
     person.speak()
     person.greet("world")
 
     println(person.name)
     println(person.age)
 
-    person.name = "Peter"
-
     println(person.name)
+
+    val student = Student("Yoel", 24, 1234)
+
+    student.speak()
+    println(student.isIntelligent())
+
+
+    val employee = Employee("Jhon", 26)
+    employee.receivePayment()
 }
